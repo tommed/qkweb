@@ -47,13 +47,13 @@ if __name__ == "__main__":
 {% extends "_base.html" %}
 {% block title %}Index Page{% endblock %}
 {% block body %}
-	<h1>Welcome!</h1>
-	<p>This site uses jinja2 templates!</p>
-	<form method="post" action="index.cgi">
-		<input type="text" name="name" placeholder="Enter your Name"/>
-		<input type="text" name="lastname" placeholder="Enter you Surname"/>
-		<input type="submit" value="send..."/>
-	</form>
+	&lt;h1&gt;Welcome!&lt;h1&gt;
+	&lt;p&gt;This site uses jinja2 templates!&lt;p&gt;
+	&lt;form method="post" action="index.cgi"&gt;
+		&lt;input type="text" name="name" placeholder="Enter your Name"/&gt;
+		&lt;input type="text" name="lastname" placeholder="Enter you Surname"/&gt;
+		&lt;input type="submit" value="send..."/&gt;
+	&lt;form&gt;
 {% endblock %}
 </code></pre>
 
@@ -63,22 +63,22 @@ if __name__ == "__main__":
 {% extends "_base.html" %}
 {% block title %}Index Page{% endblock %}
 {% block body %}
-	<h1>Welcome {{ name }}!</h1>
-	<p>Your surname is {{ form.getvalue('lastname') }}</p>
+	&lt;h1&gt;Welcome {{ name }}!&lt;h1&gt;
+	&lt;p&gt;Your surname is {{ form.getvalue('lastname') }}&lt;p&gt;
 {% endblock %}
 </code></pre>
 
 ### _base.html
 
 <pre><code>
-<!doctype html>
-<html lang="en">
-	<head>
-		<title>{% block title %}Jinja2 Templatei{% endblock %}</title>
-	</head>
-	<body>
+&lt;doctype html&gt;
+&lt;html lang="en"&gt;
+	&lt;head&gt;
+		&lt;title&gt; block title %}Jinja2 Templatei{% endblock %}&lt;title&gt;
+	&lt;head&gt;
+	&lt;body&gt;
 		{% block body %}Hello World!{% endblock %}
-	</body>
-</html>
+	&lt;body&gt;
+&lt;html&gt;
 </code></pre>
 
