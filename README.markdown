@@ -41,6 +41,20 @@ if __name__ == "__main__":
 	Runner.run(IndexHandler())
 </code></pre>
 
+### _base.html
+
+<pre><code>
+&lt;doctype html&gt;
+&lt;html lang="en"&gt;
+	&lt;head&gt;
+		&lt;title&gt; block title %}Jinja2 Templatei{% endblock %}&lt;title&gt;
+	&lt;head&gt;
+	&lt;body&gt;
+		{% block body %}Hello World!{% endblock %}
+	&lt;body&gt;
+&lt;html&gt;
+</code></pre>
+
 ### index.get.html
 
 <pre><code>
@@ -66,19 +80,5 @@ if __name__ == "__main__":
 	&lt;h1&gt;Welcome {{ name }}!&lt;h1&gt;
 	&lt;p&gt;Your surname is {{ form.getvalue('lastname') }}&lt;p&gt;
 {% endblock %}
-</code></pre>
-
-### _base.html
-
-<pre><code>
-&lt;doctype html&gt;
-&lt;html lang="en"&gt;
-	&lt;head&gt;
-		&lt;title&gt; block title %}Jinja2 Templatei{% endblock %}&lt;title&gt;
-	&lt;head&gt;
-	&lt;body&gt;
-		{% block body %}Hello World!{% endblock %}
-	&lt;body&gt;
-&lt;html&gt;
 </code></pre>
 
