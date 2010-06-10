@@ -5,6 +5,20 @@
 * License: GPL v3
 * Description: Yet another rapid application development library for Python web developers.
 
+## Why Use QkWeb?
+
+QkWeb was originally written for quickly creating small web apps which do something very specific.
+
+An example would be a url shortener. This would require a single cgi script for collecting the url
+and presenting the shortened url to the user. 
+
+* The GET request to the cgi script would render a template which contains a form for entering the url
+* The POST request to the same cgi script would take the url from the POST data and convert it to a small
+url and render a template which displays the url back to the user
+
+QkWeb uses jinja2 for web templates, which is extremely feature-rich, and also has caching abilities. 
+This means there is no reason why you shouldn't be able to use QkWeb for more complicated projects.
+
 ## Components
 
  * Jinja2 template system
