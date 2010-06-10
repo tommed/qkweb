@@ -61,7 +61,7 @@ if __name__ == "__main__":
 &lt;doctype html&gt;
 &lt;html lang="en"&gt;
 	&lt;head&gt;
-		&lt;title&gt; block title %}Jinja2 Templatei{% endblock %}&lt;title&gt;
+		&lt;title&gt;{% block title %}Jinja2 Templatei{% endblock %}&lt;title&gt;
 	&lt;head&gt;
 	&lt;body&gt;
 		{% block body %}Hello World!{% endblock %}
