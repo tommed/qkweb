@@ -1,3 +1,7 @@
 Options ExecCGI
 AddHandler cgi-script .cgi
 AddType application/x-httpd-cgi .cgi
+<Files ~ "\.db$">
+	Order allow,deny
+	Deny from all
+</Files>
