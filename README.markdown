@@ -98,4 +98,4 @@ if __name__ == "__main__":
 
 h2. Documentation
 
-Check out more documentation on the "Wiki page":http://wiki.github.com/tommed/qkweb/ !
+Check out more documentation on the [Wiki page](http://wiki.github.com/tommed/qkweb/)!
