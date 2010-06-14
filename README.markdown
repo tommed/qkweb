@@ -96,3 +96,6 @@ if __name__ == "__main__":
 {% endblock %}
 </code></pre>
 
+h2. Documentation
+
+Check out more documentation on the "Wiki page":http://wiki.github.com/tommed/qkweb/ !
