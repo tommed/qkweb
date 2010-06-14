@@ -32,8 +32,10 @@ This means there is no reason why you shouldn't be able to use QkWeb for more co
 2. Set-up CGI in Apache [using this guide](http://is.gd/cOD9b)
 3. Make sure you have ZODB installed: <code>easy_install ZODB3</code>
 4. Clone qkweb into your directory: <code>git clone git@github.com:tommed/qkweb.git</code>
-5. Create a cgi script which has a python [shebang](http://en.wikipedia.org/wiki/Shebang_(Unix)): <code>#!/usr/bin/env python</code>
-6. Now get creating!
+5. Copy our .htaccess file: <code>cp qkweb/htaccess.sample .htaccess && chmod .htaccess 660</code>
+6. Create a cgi script which has a python [shebang](http://en.wikipedia.org/wiki/Shebang_(Unix)): <code>#!/usr/bin/env python</code>
+7. Make the cgi script executable: <code>chmod 770 your_script.cgi</code>
+8. Now get creating!
 
 ## Quick Start
 
