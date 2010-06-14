@@ -26,6 +26,15 @@ This means there is no reason why you shouldn't be able to use QkWeb for more co
  * ZODB storage (no more relational tables to create yippee!)
  * Routing and general 'glue' code is my own creation
 
+## Installation
+
+ # You will need the following pre-reqs: apache2, mod_cgi, python 2.x, gcc, and setuptools
+ # Set-up CGI in Apache [using this guide](http://is.gd/cOD9b)
+ # Make sure you have ZODB installed: <code>easy_install ZODB3</code>
+ # Clone qkweb into your directory: <code>git clone git@github.com:tommed/qkweb.git</code>
+ # Create a cgi script which has a python [shbang](http://en.wikipedia.org/wiki/Shebang_(Unix)): <code>#!/usr/bin/env python</code>
+ # Now get creating!
+
 ## Quick Start
 
 The best way to describe how quickly you can write a web application with qkweb, is to show you
