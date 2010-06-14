@@ -52,7 +52,8 @@ following:
 
 <pre><code>
 #!/usr/bin/env python
-from qkweb.models import BaseHandler, Runner
+from qkweb import Runner
+from qkweb.models import BaseHandler
 
 class IndexHandler(BaseHandler):
 	def GET(self, form):

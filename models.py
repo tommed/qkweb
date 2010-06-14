@@ -4,19 +4,6 @@ import cgitb
 import sys
 sys.path.append(os.path.dirname(__file__))
 from jinja2 import Template, Environment, FileSystemLoader
-from scaffold import ScaffoldHandler
-
-class Runner:
-	"""used to start a derrivative of BaseHandler"""
-	@staticmethod
-	def run(handler):
-		"""run the given handler (derrives from BaseHandler)"""
-		cgitb.enable()
-		handler.run()
-
-	def scaffold(klass, db, model, base_template=None, view_dir='.'):
-		cgitb.enable()
-		ScaffoldHandler(klass, db, model, view_dir=view_dir).run()
 
 class BaseHandler:
 	def __init__(self, view_dir='.'):
