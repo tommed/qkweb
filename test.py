@@ -270,6 +270,25 @@ class TestDataPersistence(BaseCase):
 		self.assertEqual(model['foo'].prop1, 'goo')
 		self.assertEqual(model['foo'].prop2, 'oog')
 
+	#def test_modelWillGetIdAfterCreated
+
+	def test_modelCanBeInstantiatedByType(self):
+		type = MockPersistentObject
+		instance = type('foo', 'bar')
+		self.assertTrue(instance != None)
+		self.assertEqual(instance.prop1, 'foo')
+		self.assertEqual(instance.prop2, 'bar')
+
+	def test_modelReflection(self):
+		m = MockPersistentObject('foo', 'bar')
+		attrs = [a for a in dir(m) if a.find('__') == -1 and a.find('_p_') == -1]
+		self.assertEqual(attrs, ['id', 'prop1', 'prop2'])
+		setattr(m, 'id', 123)
+		setattr(m, 'prop1', 'goo')
+		setattr(m, 'prop2', 'oog')
+		self.assertEqual(m.prop1, 'goo')
+		self.assertEqual(m.prop2, 'oog')
+
 
 if __name__ == "__main__":
 	unittest.main()
