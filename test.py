@@ -5,6 +5,7 @@ import unittest
 sys.path.append('../')
 from qkweb.db import DbAdapter, Persistent
 from qkweb import Runner
+from qkweb.models import BaseHandler
 
 db = DbAdapter(path="/tmp/test.db")
 model = db.connect()
@@ -42,7 +43,9 @@ class MyStdin:
 		return self.string
 
 
-class TestScaffold(unittest.TestCase):
+class BaseCase(unittest.TestCase):
+	"""derrive all testcases from this class"""
+
 	def reset_stdout(self):
 		sys.stdout = sys.__stdout__
 
@@ -55,6 +58,12 @@ class TestScaffold(unittest.TestCase):
 	def assertMime(self, mime, io):
 		header = io.content[0]
 		self.assertEqual(header, 'Content-Type: %s\n' % mime, 'mime type not correct:\n' + header)
+
+
+####### Scaffold Tests ###########
+
+class TestScaffold(BaseCase):
+	"""test scaffold handler"""
 
 	def test_create(self):
 		set_cgi('GET', 'a=create')
@@ -155,6 +164,44 @@ class TestScaffold(unittest.TestCase):
 		self.assertMime('text/html', out)
 		html = '\n'.join(out.content)
 		self.assertTrue(html.find('TODO! create new item') != -1, html)
+
+
+####### Custom Handlers ###########
+
+class TestHandler(BaseHandler):
+	"""a test handler"""
+	def GET(self, qs):
+		self.set_mime('text/plain')
+		print "TEST_GET"
+
+	def POST(self, qs):
+		self.set_mime('text/plain')
+		print "TEST_POST"
+
+
+class TestCustomHandler(BaseCase):
+	""" test a custom handler"""
+	
+	def test_get(self):
+		set_cgi('GET', '')
+		out = MyStdout()
+		self.capture_stdout(out)
+		Runner.run(TestHandler())
+		self.reset_stdout()
+		self.assertMime('text/plain', out)
+		html = '\n'.join(out.content)
+		self.assertEqual(html, "Content-Type: text/plain\n\n\n\nTEST_GET\n\n")
+
+	def test_post(self):
+		set_cgi('POST', '')
+		out = MyStdout()
+		self.capture_stdout(out)
+		Runner.run(TestHandler())
+		self.reset_stdout()
+		self.assertMime('text/plain', out)
+		html = '\n'.join(out.content)
+		self.assertEqual(html, "Content-Type: text/plain\n\n\n\nTEST_POST\n\n")
+
 
 if __name__ == "__main__":
 	unittest.main()
