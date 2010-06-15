@@ -25,12 +25,10 @@ class BaseHandler:
 	def GET(self, form):
 		"""virtual method for handling GET requests"""
 		print "GET: not yet implemented"
-		pass
 
 	def POST(self, form):
 		"""virtual method for handling POST requests"""
 		print "POST: not yet implemented"
-		pass
 
 	def set_mime(self, mimeType="text/html"):
 		print "Content-Type: %s\n" % mimeType

@@ -45,7 +45,7 @@ class ScaffoldHandler(BaseHandler):
 		elif form.getvalue('a') == 'create':
 			self.create_form_()
 		else:
-			print "NOT IMPLEMENTED %s" % form.getvalue('a')
+			print "SCAFFOLD GET ACTION NOT IMPLEMENTED %s" % form.getvalue('a')
 
 	def POST(self, form):
 		self.set_mime("text/html")
@@ -60,6 +60,6 @@ class ScaffoldHandler(BaseHandler):
 		elif form.getvalue('a') == 'delete':
 			self.delete_(int(form.getvalue('id')))
 		else:
-			print "NOT IMPLEMENTED %s" % form.getvalue('a')
+			print "SCAFFOLD POST ACTION NOT IMPLEMENTED %s" % form.getvalue('a')
 
 
