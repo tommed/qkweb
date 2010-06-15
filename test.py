@@ -203,6 +203,74 @@ class TestCustomHandler(BaseCase):
 		self.assertEqual(html, "Content-Type: text/plain\n\n\n\nTEST_POST\n\n")
 
 
+####### Data Persistence ###########
+
+class TestDataPersistence(BaseCase):
+	"""test zodb data persistence"""
+
+	def test_save(self):
+		db.begin_transaction()
+		model['foo'] = 'bar'
+		db.commit()
+		self.assertTrue('foo' in model)
+		self.assertEqual(model['foo'], 'bar')
+
+	def test_rollback(self):
+		db.begin_transaction()
+		model['foo'] = 'bar'
+		self.assertTrue('foo' in model)
+		self.assertEqual(model['foo'], 'bar')
+		db.commit()
+		self.assertEqual(model['foo'], 'bar')
+		db.begin_transaction()
+		model['foo'] = 'goo'
+		self.assertEqual(model['foo'], 'goo')
+		db.rollback()
+		self.assertEqual(model['foo'], 'bar')
+
+	def test_modelCanBeSaved(self):
+		db.begin_transaction()
+		m = MockPersistentObject('foo', 'bar')
+		self.assertEqual(m.prop1, 'foo')
+		self.assertEqual(m.prop2, 'bar')
+		model['foo'] = m
+		db.commit()
+		self.assertEqual(model['foo'].prop1, 'foo')
+		self.assertEqual(model['foo'].prop2, 'bar')
+
+	def test_modelCanBeRolledback(self):
+		db.begin_transaction()
+		m = MockPersistentObject('foo', 'bar')
+		self.assertEqual(m.prop1, 'foo')
+		self.assertEqual(m.prop2, 'bar')
+		model['foo'] = m
+		db.commit()
+		self.assertEqual(model['foo'].prop1, 'foo')
+		self.assertEqual(model['foo'].prop2, 'bar')
+		db.begin_transaction()
+		model['foo'].prop1 = 'goo'
+		model['foo'].prop2 = 'oog'
+		db.rollback()
+		self.assertEqual(model['foo'].prop1, 'foo')
+		self.assertEqual(model['foo'].prop2, 'bar')
+
+	def test_modelCanBeChanged(self):
+		db.begin_transaction()
+		m = MockPersistentObject('foo', 'bar')
+		self.assertEqual(m.prop1, 'foo')
+		self.assertEqual(m.prop2, 'bar')
+		model['foo'] = m
+		db.commit()
+		self.assertEqual(model['foo'].prop1, 'foo')
+		self.assertEqual(model['foo'].prop2, 'bar')
+		db.begin_transaction()
+		model['foo'].prop1 = 'goo'
+		model['foo'].prop2 = 'oog'
+		db.commit()
+		self.assertEqual(model['foo'].prop1, 'goo')
+		self.assertEqual(model['foo'].prop2, 'oog')
+
+
 if __name__ == "__main__":
 	unittest.main()
 	db.disconnect()
