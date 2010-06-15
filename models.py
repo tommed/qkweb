@@ -19,6 +19,8 @@ class BaseHandler:
 			self.GET(form)
 		elif method == "POST":
 			self.POST(form)
+		else:
+			print "unsupported request method of %s" % method
 
 	def GET(self, form):
 		"""virtual method for handling GET requests"""
