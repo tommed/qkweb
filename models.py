@@ -5,6 +5,9 @@ import sys
 sys.path.append(os.path.dirname(__file__))
 from jinja2 import Template, Environment, FileSystemLoader
 
+def datetimeformat(value, format="%Y-%m-%d %H:%M"):
+	return value.strftime(format)
+
 class BaseHandler:
 	def __init__(self, view_dir='.'):
 		self.mime_set = False
@@ -39,6 +42,7 @@ class BaseHandler:
 		if not self.mime_set:
 			self.set_mime(mime)
 		env = Environment(loader=FileSystemLoader(self.view_dir))
+		env.filters['datetimeformat'] = datetimeformat
 		template = env.get_template(viewfile)
 		print template.render(context)
 
