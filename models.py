@@ -8,6 +8,12 @@ from jinja2 import Template, Environment, FileSystemLoader
 def datetimeformat(value, format="%Y-%m-%d %H:%M"):
 	return value.strftime(format)
 
+def option(value, compareTo):
+	if str(value) == str(compareTo):
+		return 'selected'
+	else:
+		return ''
+
 class BaseHandler:
 	def __init__(self, view_dir='.'):
 		self.mime_set = False
@@ -43,6 +49,7 @@ class BaseHandler:
 			self.set_mime(mime)
 		env = Environment(loader=FileSystemLoader(self.view_dir))
 		env.filters['datetimeformat'] = datetimeformat
+		env.filters['option'] = option
 		template = env.get_template(viewfile)
 		print template.render(context)
 
