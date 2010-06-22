@@ -53,4 +53,9 @@ class BaseHandler:
 		template = env.get_template(viewfile)
 		print template.render(context)
 
+	def redirect(self, url):
+		"""redirect to another url. Doesn't work if set_mime is already called"""
+		print "Status: 302 Found"
+		print "Location: %s\n" % url
+
 
