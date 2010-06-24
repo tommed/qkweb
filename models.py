@@ -8,6 +8,9 @@ from jinja2 import Template, Environment, FileSystemLoader
 def datetimeformat(value, format="%Y-%m-%d %H:%M"):
 	return value.strftime(format)
 
+def htmlescape(value):
+	return value.replace('<','&lt;').replace('>','&gt;').replace('\n', '<br/>\r')
+
 def option(value, compareTo, trueResult='selected', falseResult=''):
 	if str(value) == str(compareTo):
 		return trueResult
@@ -50,6 +53,7 @@ class BaseHandler:
 		env = Environment(loader=FileSystemLoader(self.view_dir))
 		env.filters['datetimeformat'] = datetimeformat
 		env.filters['option'] = option
+		env.filters['escape'] = htmlescape
 		template = env.get_template(viewfile)
 		print template.render(context)
 
