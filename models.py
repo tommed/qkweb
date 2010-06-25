@@ -8,11 +8,11 @@ from jinja2 import Template, Environment, FileSystemLoader
 def datetimeformat(value, format="%Y-%m-%d %H:%M"):
 	return value.strftime(format)
 
-def option(value, compareTo):
+def option(value, compareTo, trueResult='selected', falseResult=''):
 	if str(value) == str(compareTo):
-		return 'selected'
+		return trueResult
 	else:
-		return ''
+		return falseResult
 
 class BaseHandler:
 	def __init__(self, view_dir='.'):
@@ -52,5 +52,10 @@ class BaseHandler:
 		env.filters['option'] = option
 		template = env.get_template(viewfile)
 		print template.render(context)
+
+	def redirect(self, url):
+		"""redirect to another url. Doesn't work if set_mime is already called"""
+		print "Status: 302 Found"
+		print "Location: %s\n" % url
 
 
