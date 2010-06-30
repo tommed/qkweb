@@ -2,6 +2,7 @@ import cgi
 import os
 import cgitb
 import sys
+import re
 sys.path.append(os.path.dirname(__file__))
 from jinja2 import Template, Environment, FileSystemLoader
 
@@ -10,6 +11,9 @@ def datetimeformat(value, format="%Y-%m-%d %H:%M"):
 
 def htmlescape(value):
 	return value.replace('<','&lt;').replace('>','&gt;').replace('\n', '<br/>\r')
+
+def linkify(value):
+	return re.sub(r'(http(s)?://([^\s]+))', r'<a href="\1">\1</a>', value)
 
 def option(value, compareTo, trueResult='selected', falseResult=''):
 	if str(value) == str(compareTo):
@@ -43,7 +47,7 @@ class BaseHandler:
 		print "POST: not yet implemented"
 
 	def set_mime(self, mimeType="text/html"):
-		print "Content-Type: %s\n" % mimeType
+		print "Content-Type: %s; charset=UTF-8\n" % mimeType
 		self.mime_set = True
 
 	def render_template(self, viewfile, context, mime="text/html"):
@@ -54,8 +58,9 @@ class BaseHandler:
 		env.filters['datetimeformat'] = datetimeformat
 		env.filters['option'] = option
 		env.filters['escape'] = htmlescape
+		env.filters['linkify'] = linkify
 		template = env.get_template(viewfile)
-		print template.render(context)
+		print template.render(context).encode('utf-8')
 
 	def redirect(self, url):
 		"""redirect to another url. Doesn't work if set_mime is already called"""
