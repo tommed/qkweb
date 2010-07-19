@@ -1,4 +1,5 @@
 import cgi
+from datetime import datetime
 import os
 import cgitb
 import sys
@@ -6,8 +7,22 @@ import re
 sys.path.append(os.path.dirname(__file__))
 from jinja2 import Template, Environment, FileSystemLoader
 
-def datetimeformat(value, format="%Y-%m-%d %H:%M"):
-	return value.strftime(format)
+t_minute = 1 * 60
+t_hour = t_minute * 60
+t_day = t_hour * 24
+
+def datetimeformat(date, format="%Y-%m-%d %H:%M"):
+	now = datetime.utcnow()
+	if date.year == now.year and date.month == now.month and date.day == now.day:
+		secs = (now - date).seconds
+		if secs > t_hour:
+			return "%d hours ago" % (secs / 60 / 60)
+		elif secs > t_minute:
+			return "%d mins ago" % (secs / 60)
+		else:
+			return "%d seconds ago" % secs
+	else:
+		return date.strftime(format)
 
 def htmlescape(value):
 	return value.replace('<','&lt;').replace('>','&gt;').replace('\n', '<br/>\r')
