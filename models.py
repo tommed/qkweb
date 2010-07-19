@@ -13,7 +13,12 @@ t_day = t_hour * 24
 
 def datetimeformat(date, format="%Y-%m-%d %H:%M"):
 	now = datetime.utcnow()
-	if date.year == now.year and date.month == now.month and date.day == now.day:
+	days = (now - date).days
+	if days == 1:
+		return "yesterday"
+	if days > 1 and days < 5:
+		return "%d days ago" % (days)
+	elif date.year == now.year and date.month == now.month and date.day == now.day:
 		secs = (now - date).seconds
 		if secs > t_hour:
 			return "%d hours ago" % (secs / 60 / 60)
