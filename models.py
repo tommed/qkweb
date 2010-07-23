@@ -12,6 +12,8 @@ t_hour = t_minute * 60
 t_day = t_hour * 24
 
 def datetimeformat(date, format="%Y-%m-%d %H:%M"):
+	if not date:
+		return 'never'
 	now = datetime.utcnow()
 	days = (now - date).days
 	if days == 1:
@@ -30,6 +32,9 @@ def datetimeformat(date, format="%Y-%m-%d %H:%M"):
 		return "yesterday"
 	else:
 		return date.strftime(format)
+
+def getlen(value):
+	return len(value)
 
 def htmlescape(value):
 	return value.replace('<','&lt;').replace('>','&gt;').replace('\n', '<br/>\r')
@@ -81,6 +86,7 @@ class BaseHandler:
 		env.filters['option'] = option
 		env.filters['escape'] = htmlescape
 		env.filters['linkify'] = linkify
+		env.filters['len'] = getlen
 		template = env.get_template(viewfile)
 		print template.render(context).encode('utf-8')
 
