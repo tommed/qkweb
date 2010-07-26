@@ -18,8 +18,14 @@ def datetimeformat(date, format="%Y-%m-%d %H:%M"):
 	days = (now - date).days
 	if days == 1:
 		return "yesterday"
-	if days > 1 and days < 5:
+	elif days > 1 and days < 7:
 		return "%d days ago" % (days)
+	elif days >= 7 and now.month == date.month:
+		return "%d weeks ago" % (days/7)
+	elif now.month-1 == date.month:
+		return "last month"
+	elif now.year == date.year:
+		return "%d months ago" % (now.month - date.month)
 	elif date.year == now.year and date.month == now.month and date.day == now.day:
 		secs = (now - date).seconds
 		if secs > t_hour:
