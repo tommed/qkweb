@@ -24,8 +24,6 @@ def datetimeformat(date, format="%Y-%m-%d %H:%M"):
 		return "%d weeks ago" % (days/7)
 	elif now.month-1 == date.month:
 		return "last month"
-	elif now.year == date.year:
-		return "%d months ago" % (now.month - date.month)
 	elif date.year == now.year and date.month == now.month and date.day == now.day:
 		secs = (now - date).seconds
 		if secs > t_hour:
@@ -36,6 +34,8 @@ def datetimeformat(date, format="%Y-%m-%d %H:%M"):
 			return "%d seconds ago" % secs
 	elif date.year == now.year and date.month == now.month and days == 0:
 		return "yesterday"
+	elif now.year == date.year:
+		return "%d months ago" % (now.month - date.month)
 	else:
 		return date.strftime(format)
 
