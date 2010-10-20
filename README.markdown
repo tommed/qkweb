@@ -1,7 +1,7 @@
 # QkWeb
 
 * Project: QkWeb
-* Author: Tom <tom.medhurst@gmail.com>
+* Author: Thomas Medhurst <tom@tommed.co.uk>
 * License: GPL v3
 * Description: Yet another rapid application development library for Python web developers.
 
