@@ -2,10 +2,10 @@ import cgitb
 from qkweb.scaffold import ScaffoldHandler
 
 class Runner:
-	"""used to start a derrivative of BaseHandler"""
+	"""used to start a derrivative of L{BaseHandler}"""
 	@staticmethod
 	def run(handler):
-		"""run the given handler (derrives from BaseHandler)"""
+		"""run the given handler (derrives from L{BaseHandler})"""
 		cgitb.enable()
 		handler.run()
 
